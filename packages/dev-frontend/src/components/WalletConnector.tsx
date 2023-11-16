@@ -1,6 +1,7 @@
 import { ConnectKitButton } from "connectkit";
-import { Box, Button, Flex } from "theme-ui";
+import { Box, Button } from "theme-ui";
 import { Icon } from "./Icon";
+import { ConnectPage } from "./ConnectPage";
 
 type WalletConnectorProps = {
   loader?: React.ReactNode;
@@ -13,12 +14,12 @@ export const WalletConnector: React.FC<WalletConnectorProps> = ({ children }) =>
         connectKit.isConnected ? (
           children
         ) : (
-          <Flex sx={{ height: "100vh", justifyContent: "center", alignItems: "center" }}>
+          <ConnectPage>
             <Button onClick={connectKit.show}>
               <Icon name="plug" size="lg" />
               <Box sx={{ ml: 2 }}>Connect wallet</Box>
             </Button>
-          </Flex>
+          </ConnectPage>
         )
       }
     </ConnectKitButton.Custom>
