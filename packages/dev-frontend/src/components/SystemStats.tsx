@@ -5,8 +5,8 @@ import { Decimal, Percent, LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 
 import { useLiquity } from "../hooks/LiquityContext";
+import { COIN, GT } from "../strings";
 import { Statistic } from "./Statistic";
-import * as l from "../lexicon";
 
 const selectBalances = ({ accountBalance, lusdBalance, lqtyBalance }: LiquityStoreState) => ({
   accountBalance,
@@ -20,9 +20,9 @@ const Balances: React.FC = () => {
   return (
     <Box sx={{ mb: 3 }}>
       <Heading>My Account Balances</Heading>
-      <Statistic lexicon={l.ETH}>{accountBalance.prettify(4)}</Statistic>
-      <Statistic lexicon={l.LUSD}>{lusdBalance.prettify()}</Statistic>
-      <Statistic lexicon={l.LQTY}>{lqtyBalance.prettify()}</Statistic>
+      <Statistic name="ETH"> {accountBalance.prettify(4)}</Statistic>
+      <Statistic name={COIN}> {lusdBalance.prettify()}</Statistic>
+      <Statistic name={GT}>{lqtyBalance.prettify()}</Statistic>
     </Box>
   );
 };
@@ -81,8 +81,6 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
 
   const lusdInStabilityPoolPct =
     total.debt.nonZero && new Percent(lusdInStabilityPool.div(total.debt));
-  let lusdInBammPct = undefined;
-  if(stabilityDeposit.totalLusdInBamm){new Percent(stabilityDeposit.totalLusdInBamm.div(lusdInStabilityPool))}
   const totalCollateralRatioPct = new Percent(total.collateralRatio(price));
   const borrowingFeePct = new Percent(borrowingRate);
   const kickbackRatePct = frontendTag === AddressZero ? "100" : kickbackRate?.mul(100).prettify();
@@ -96,17 +94,41 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
       <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
         Protocol
       </Heading>
+      <div  className="hide" > 
+      <Statistic
+        name="Borrowing Fee"
+        tooltip="The Borrowing Fee is a one-off fee charged as a percentage of the borrowed amount (in LUSD) and is part of a Trove's debt. The fee varies between 0.5% and 5% depending on LUSD redemption volumes."
+      >
+        {borrowingFeePct.toString(2)}
+      </Statistic>
 
-      <Statistic lexicon={l.BORROW_FEE}>{borrowingFeePct.toString(2)}</Statistic>
-
-      <Statistic lexicon={l.TVL}>
+      <Statistic
+        name="TVL"
+        tooltip="The Total Value Locked (TVL) is the total value of Ether locked as collateral in the system, given in ETH and USD."
+      >
         {total.collateral.shorten()} <Text sx={{ fontSize: 1 }}>&nbsp;ETH</Text>
         <Text sx={{ fontSize: 1 }}>
           &nbsp;(${Decimal.from(total.collateral.mul(price)).shorten()})
         </Text>
       </Statistic>
-      <Statistic lexicon={l.TROVES}>{Decimal.from(numberOfTroves).prettify(0)}</Statistic>
-      <Statistic lexicon={l.LUSD_SUPPLY}>{total.debt.shorten()}</Statistic>
+      <Statistic name="Troves" tooltip="The total number of active Troves in the system.">
+        {Decimal.from(numberOfTroves).prettify(0)}
+      </Statistic>
+
+      <Statistic name="LUSD supply" tooltip="The total LUSD minted by the Liquity Protocol.">
+        {total.debt.shorten()}
+      </Statistic>      
+      </div>
+      {lusdInStabilityPoolPct && (
+        <Statistic
+          name="LUSD in Stability Pool"
+          tooltip="The total LUSD currently held in the Stability Pool, expressed as an amount and a fraction of the LUSD supply.
+        "
+        >
+          {lusdInStabilityPool.shorten()}
+          <Text sx={{ fontSize: 1 }}>&nbsp;({lusdInStabilityPoolPct.toString(1)})</Text>
+        </Statistic>
+      )}
       {/*{stabilityDeposit.totalLusdInBamm && (
         <Statistic
           name="LUSD in B.Protocol"
@@ -141,15 +163,22 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
       <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
         Frontend
       </Heading>
-      {kickbackRatePct && <Statistic lexicon={l.KICKBACK_RATE}>{kickbackRatePct}%</Statistic>}
+      {kickbackRatePct && (
+        <Statistic
+          name="Kickback Rate"
+          tooltip="A rate between 0 and 100% set by the Frontend Operator that determines the fraction of LQTY that will be paid out as a kickback to the Stability Providers using the frontend."
+        >
+          {kickbackRatePct}%
+        </Statistic>
+      )}
 
       <Box sx={{ mt: 3, opacity: 0.66 }}>
         <Box sx={{ fontSize: 0 }}>
           Frontend version:{" "}
-          {import.meta.env.DEV ? (
+          {process.env.NODE_ENV === "development" ? (
             "development"
           ) : (
-            <GitHubCommit>{import.meta.env.VITE_APP_VERSION}</GitHubCommit>
+            <GitHubCommit>{process.env.REACT_APP_VERSION}</GitHubCommit>
           )}
           <Box sx={{ fontSize: 0 }}>the Frontend commit hash includes the smart contracts</Box>
         </Box>
