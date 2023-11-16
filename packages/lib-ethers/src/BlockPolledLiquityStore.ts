@@ -39,6 +39,8 @@ export interface BlockPolledLiquityStoreExtraState {
 
   /** @internal */
   _feesFactory: (blockTimestamp: number, recoveryMode: boolean) => Fees;
+
+  bammAllowance: boolean;
 }
 
 /**
@@ -93,6 +95,7 @@ export class BlockPolledLiquityStore extends LiquityStore<BlockPolledLiquityStor
       blockTimestamp,
       _feesFactory,
       calculateRemainingLQTY,
+      bammAllowance,
       ...baseState
     } = await promiseAllValues({
       blockTimestamp: this._readable._getBlockTimestamp(blockTag),
@@ -100,7 +103,7 @@ export class BlockPolledLiquityStore extends LiquityStore<BlockPolledLiquityStor
       calculateRemainingLQTY: this._readable._getRemainingLiquidityMiningLQTYRewardCalculator({
         blockTag
       }),
-
+      bammAllowance: this._readable.getBammAllowance({ blockTag }),
       price: this._readable.getPrice({ blockTag }),
       numberOfTroves: this._readable.getNumberOfTroves({ blockTag }),
       totalRedistributed: this._readable.getTotalRedistributed({ blockTag }),
@@ -156,7 +159,12 @@ export class BlockPolledLiquityStore extends LiquityStore<BlockPolledLiquityStor
               Decimal.ZERO,
               Decimal.ZERO,
               Decimal.ZERO,
-              AddressZero
+              Decimal.ZERO,
+              Decimal.ZERO,
+              Decimal.ZERO,
+              AddressZero,
+              Decimal.ZERO,
+              Decimal.ZERO,
             ),
             lqtyStake: new LQTYStake(),
             ownFrontend: { status: "unregistered" as const }
@@ -172,7 +180,8 @@ export class BlockPolledLiquityStore extends LiquityStore<BlockPolledLiquityStor
       {
         blockTag,
         blockTimestamp,
-        _feesFactory
+        _feesFactory,
+        bammAllowance
       }
     ];
   }
@@ -230,7 +239,8 @@ export class BlockPolledLiquityStore extends LiquityStore<BlockPolledLiquityStor
     return {
       blockTag: stateUpdate.blockTag ?? oldState.blockTag,
       blockTimestamp: stateUpdate.blockTimestamp ?? oldState.blockTimestamp,
-      _feesFactory: stateUpdate._feesFactory ?? oldState._feesFactory
+      _feesFactory: stateUpdate._feesFactory ?? oldState._feesFactory,
+      bammAllowance: stateUpdate.bammAllowance ?? oldState.bammAllowance,
     };
   }
 }

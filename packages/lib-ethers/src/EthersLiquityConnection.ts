@@ -4,12 +4,8 @@ import { Signer } from "@ethersproject/abstract-signer";
 import { Decimal } from "@liquity/lib-base";
 
 import devOrNull from "../deployments/dev.json";
-import goerli from "../deployments/goerli.json";
 import kovan from "../deployments/kovan.json";
-import rinkeby from "../deployments/rinkeby.json";
-import ropsten from "../deployments/ropsten.json";
 import mainnet from "../deployments/mainnet.json";
-import kiln from "../deployments/kiln.json";
 
 import { numberify, panic } from "./_utils";
 import { EthersProvider, EthersSigner } from "./types";
@@ -29,11 +25,11 @@ const deployments: {
   [chainId: number]: _LiquityDeploymentJSON | undefined;
 } = {
   [mainnet.chainId]: mainnet,
-  [ropsten.chainId]: ropsten,
-  [rinkeby.chainId]: rinkeby,
-  [goerli.chainId]: goerli,
+  //[ropsten.chainId]: ropsten,
+  //[rinkeby.chainId]: rinkeby,
+  //[goerli.chainId]: goerli,
   [kovan.chainId]: kovan,
-  [kiln.chainId]: kiln,
+  [1337]: mainnet,
 
   ...(dev !== null ? { [dev.chainId]: dev } : {})
 };
