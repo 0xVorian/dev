@@ -8,6 +8,7 @@ type StatisticProps = {
 };
 
 export const Statistic: React.FC<StatisticProps> = ({ lexicon, children }) => {
+  if(lexicon){
   return (
     <Flex sx={{ borderBottom: 1, borderColor: "rgba(0, 0, 0, 0.1)" }}>
       <Flex sx={{ alignItems: "center", justifyContent: "flex-start", flex: 1.2, fontWeight: 200 }}>
@@ -17,4 +18,8 @@ export const Statistic: React.FC<StatisticProps> = ({ lexicon, children }) => {
       <Flex sx={{ justifyContent: "flex-end", flex: 1, alignItems: "center" }}>{children}</Flex>
     </Flex>
   );
+}
+else return (
+  <Flex>Missing lexicon</Flex>
+)
 };
