@@ -5,7 +5,7 @@
     "packages": [
       "packages/*"
     ],
-    "nohoist": [
+    "installConfig.hoistingLimits": [
       "**/web3-eth-abi/@ethersproject/abi",
       "**/@graphprotocol/*",
       "**/jest*",

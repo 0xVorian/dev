@@ -1711,8 +1711,8 @@ __metadata:
 
 "@liquity/chicken-bonds@file:.yalc/@liquity/chicken-bonds::locator=%40liquity%2Fdev-frontend%40workspace%3Apackages%2Fdev-frontend":
   version: 0.0.1
-  resolution: "@liquity/chicken-bonds@file:.yalc/@liquity/chicken-bonds#.yalc/@liquity/chicken-bonds::hash=f4a3c3&locator=%40liquity%2Fdev-frontend%40workspace%3Apackages%2Fdev-frontend"
-  checksum: c16397fed7724fd7ab81ca45b8531dc73437d494543e36b4c290fb1f10acc0b9ef541cad8b7a60789c02f4639a25bb951451b1eb6ca2ed5403fca6f79dd7f13b
+  resolution: "@liquity/chicken-bonds@file:.yalc/@liquity/chicken-bonds#.yalc/@liquity/chicken-bonds::hash=9e683d&locator=%40liquity%2Fdev-frontend%40workspace%3Apackages%2Fdev-frontend"
+  checksum: 02d064f55504178cc59d0975773d4e257c3e31c1a520bb7f61a1ab987ac5ad23b900206c1ceecffbef75c6738da399c11e9855372022840b1f47c210446fd1a9
   languageName: node
   linkType: hard
 
@@ -6317,7 +6317,7 @@ __metadata:
   bin:
     asc: bin/asc
     asinit: bin/asinit
-  checksum: 8a407db6179addfaa5fcc637543a755ecc22ae8dd5e8259492305afd0d2bb73eae019d4178f79b515f75648d71dfda2c1ceb0c7421bff7817aebb2e2f5c8bfe7
+  checksum: f9458c395d45721243d7b20060ca01b309fe20a951b3324955946a6e5eb7fcb0dbe1ba7f0826837b346115c509e5f4fbe4f781ce7d84eae0bf81ed5e26c6df14
   languageName: node
   linkType: hard
 
