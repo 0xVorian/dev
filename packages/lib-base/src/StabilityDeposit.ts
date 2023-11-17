@@ -124,6 +124,7 @@ export class StabilityDeposit {
    * @returns An object representing the change, or `undefined` if the deposited amounts are equal.
    */
   whatChanged(thatUSD: Decimalish): StabilityDepositChange<Decimal> | undefined {
+    console.log('thatUSD', thatUSD);
     thatUSD = Decimal.from(thatUSD);
 
     if (thatUSD.lt(this.currentUSD)) {

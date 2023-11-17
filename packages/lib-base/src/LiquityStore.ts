@@ -210,7 +210,7 @@ const difference = <T>(a: T, b: T) =>
  */
 export abstract class LiquityStore<T = unknown> {
   /** Turn console logging on/off. */
-  logging = false;
+  logging = true;
 
   /**
    * Called after the state is fetched for the first time.

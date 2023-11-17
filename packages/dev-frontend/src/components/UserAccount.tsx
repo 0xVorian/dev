@@ -9,8 +9,6 @@ import { useLiquity } from "../hooks/LiquityContext";
 import { shortenAddress } from "../utils/shortenAddress";
 
 import { Icon } from "./Icon";
-import { useBondView } from "./Bonds/context/BondViewContext";
-import { useBondAddresses } from "./Bonds/context/BondAddressesContext";
 import { ConnectKitButton } from "connectkit";
 
 const select = ({ accountBalance, lusdBalance, lqtyBalance }: LiquityStoreState) => ({
@@ -21,11 +19,8 @@ const select = ({ accountBalance, lusdBalance, lqtyBalance }: LiquityStoreState)
 
 export const UserAccount: React.FC = () => {
   const { account } = useLiquity();
-  const { accountBalance, lusdBalance: realLusdBalance, lqtyBalance } = useLiquitySelector(select);
-  const { lusdBalance: customLusdBalance } = useBondView();
-  const { LUSD_OVERRIDE_ADDRESS } = useBondAddresses();
+  const { accountBalance, lusdBalance, lqtyBalance } = useLiquitySelector(select);
 
-  const lusdBalance = LUSD_OVERRIDE_ADDRESS === null ? realLusdBalance : customLusdBalance;
 
   return (
     <Flex>
