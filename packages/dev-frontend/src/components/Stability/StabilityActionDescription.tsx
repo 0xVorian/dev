@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Decimal, StabilityDeposit, StabilityDepositChange, Difference} from "@liquity/lib-base";
+import { Decimal, StabilityDeposit, StabilityDepositChange, Difference } from "@liquity/lib-base";
 
 import { COIN, GT } from "../../strings";
 import { ActionDescription, Amount } from "../ActionDescription";
@@ -18,7 +18,6 @@ export const StabilityActionDescription: React.FC<StabilityActionDescriptionProp
   lusdDiff,
   ethDiff,
 }) => {
-  const collateralGain = originalDeposit.collateralGain.nonZero?.prettify(4).concat(" ETH");
   const lqtyReward = originalDeposit.lqtyReward.nonZero?.prettify().concat(" ", GT);
 
   let eth = ethDiff?.prettify(4)

@@ -64,7 +64,7 @@ const select = ({
 export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", showBalances }) => {
   const {
     liquity: {
-      connection: { version: contractsVersion, deploymentDate, frontendTag }
+      connection: { version: frontendTag }
     }
   } = useLiquity();
 
@@ -76,7 +76,6 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
     borrowingRate,
     totalStakedLQTY,
     kickbackRate,
-    stabilityDeposit
   } = useLiquitySelector(select);
 
   const lusdInStabilityPoolPct =

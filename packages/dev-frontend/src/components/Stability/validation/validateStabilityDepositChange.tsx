@@ -1,6 +1,5 @@
 import {
   Decimal,
-  LiquityStoreState,
   StabilityDeposit,
   StabilityDepositChange
 } from "@liquity/lib-base";
@@ -13,7 +12,7 @@ import { COIN } from "../../../strings";
 import { Amount } from "../../ActionDescription";
 import { ErrorDescription } from "../../ErrorDescription";
 import { StabilityActionDescription } from "../StabilityActionDescription";
-import { UnlockButton } from "../NoDeposit"
+import { UnlockButton } from "../NoDeposit";
 
 export const selectForStabilityDepositChangeValidation = ({
   trove,

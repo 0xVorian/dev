@@ -4,9 +4,7 @@ import { Button, Flex } from "theme-ui";
 import { Decimal, Decimalish, LiquityStoreState } from "@liquity/lib-base";
 import { LiquityStoreUpdate, useLiquityReducer, useLiquitySelector } from "@liquity/lib-react";
 
-import { COIN } from "../../strings";
 
-import { ActionDescription } from "../ActionDescription";
 import { useMyTransactionState } from "../Transaction";
 
 import { StabilityDepositEditor } from "./StabilityDepositEditor";
@@ -110,7 +108,6 @@ export const StabilityDepositManager: React.FC = () => {
     undefined,
   );
 
-  const makingNewDeposit = originalDeposit.isEmpty;
 
   const myTransactionState = useMyTransactionState(transactionId);
 
