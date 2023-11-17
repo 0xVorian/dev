@@ -1,15 +1,5 @@
-import { Flex, Box, Badge } from "theme-ui";
+import { Flex, Box } from "theme-ui";
 import { Link } from "./Link";
-
-const TemporaryNewBadge = () => {
-  const isBeforeNovember2022 = new Date() < new Date("2022-11-01");
-  if (!isBeforeNovember2022) return null;
-  return (
-    <Badge ml={1} sx={{ fontSize: "12px" }}>
-      New
-    </Badge>
-  );
-};
 
 export const Nav: React.FC = () => {
   return (

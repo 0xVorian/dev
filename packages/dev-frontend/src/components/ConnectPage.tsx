@@ -1,14 +1,13 @@
 import React from "react";
-import { Flex, Link, Box } from "theme-ui";
+import { Flex, Box } from "theme-ui";
 
-type ConnectPageProps = {
-};
+type ConnectPageProps = object;
 
 type ItemProps = {
   icon: string,
   title: React.ReactElement,
   text: string,
-  link: any
+  link: string
 };
 
 export const device = {
