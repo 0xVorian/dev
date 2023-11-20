@@ -101,7 +101,7 @@ const App = () => {
             })
           )}
         >
-          <ConnectKitProvider options={{ hideBalance: true }}>
+          <ConnectKitProvider options={{ hideBalance: true, walletConnectCTA: "both", walletConnectName: "WalletConnect" }}>
             <WalletConnector loader={loader}>
               <LiquityProvider
                 loader={loader}
