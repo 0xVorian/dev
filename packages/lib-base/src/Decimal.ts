@@ -113,13 +113,11 @@ export class Decimal {
   }
 
   static from(decimalish: Decimalish): Decimal {
-    console.log('decimalish', decimalish);
     switch (typeof decimalish) {
       case "object":
         if (decimalish instanceof Decimal) {
           return decimalish;
         } else {
-    console.log('decimalish', decimalish);
     throw new Error("invalid Decimalish value");
         }
       case "string":
@@ -127,7 +125,6 @@ export class Decimal {
       case "number":
         return Decimal._fromString(decimalish.toString());
       default:
-    console.log('decimalish', decimalish);
     throw new Error("invalid Decimalish value");
     }
   }
