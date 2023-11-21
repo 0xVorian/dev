@@ -4,13 +4,18 @@ import { InfoMessage } from "../InfoMessage";
 import { useStabilityView } from "./context/StabilityViewContext";
 import { RemainingLQTY } from "./RemainingLQTY";
 import { Yield } from "./Yield";
+import { useLiquitySelector } from "@liquity/lib-react";
 import { useTransactionFunction } from "../Transaction";
 import { useLiquity } from "./../../hooks/LiquityContext";
 
 
+const selector = ( {bammAllowance}: any) => ({
+  bammAllowance
+});
+
 export const UnlockButton: React.FC = props => {
   const { liquity } = useLiquity();
-  const [sendTransaction] = useTransactionFunction(
+  const [sendTransaction, transactionState] = useTransactionFunction(
     "bamm-unlock",
     liquity.send.bammUnlock.bind(liquity.send)
   );
@@ -28,7 +33,9 @@ export const UnlockButton: React.FC = props => {
   )
 }
 
-export const NoDeposit: React.FC = () => {
+export const NoDeposit: React.FC = props => {
+  const { liquity } = useLiquity();
+  const { bammAllowance } = useLiquitySelector(selector);
   const { dispatchEvent } = useStabilityView();
 
   const handleOpenTrove = useCallback(() => {

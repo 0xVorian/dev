@@ -38,6 +38,7 @@ type StabilityDepositEditorProps = {
   dispatch: (action: { type: "setDeposit"; newValue: Decimalish } | { type: "revert" }) => void;
 };
 
+const selectPrice = ({ price }: LiquityStoreState) => price;
 
 export const StabilityDepositEditor: React.FC<StabilityDepositEditorProps> = ({
   originalDeposit,
@@ -48,6 +49,7 @@ export const StabilityDepositEditor: React.FC<StabilityDepositEditorProps> = ({
 }) => {
   const { lusdBalance, lusdInStabilityPool, stabilityDeposit } = useLiquitySelector(select);
   const editingState = useState<string>();
+  const price = useLiquitySelector(selectPrice);
   const validationContext = useLiquitySelector(selectForStabilityDepositChangeValidation);
 
 
@@ -56,10 +58,11 @@ export const StabilityDepositEditor: React.FC<StabilityDepositEditorProps> = ({
   const maxAmount = stabilityDeposit.currentUSD.add(lusdBalance);
   const maxedOut = editedUSD.eq(maxAmount);
 
+  const ethInUsd = originalDeposit.currentUSD.sub(stabilityDeposit.currentLUSD)
   
   const originalPoolShare = originalDeposit.currentLUSD.mulDiv(100, lusdInStabilityPool);
 
-  const {bammPoolShare} = stabilityDeposit;
+  const {bammPoolShare, collateralGain} = stabilityDeposit;
 
   const userTotalUsdInBamm = stabilityDeposit.currentUSD
   const totalUsdInBamm = userTotalUsdInBamm.mulDiv(100, bammPoolShare);

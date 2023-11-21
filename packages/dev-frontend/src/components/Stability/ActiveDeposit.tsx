@@ -23,7 +23,7 @@ const selector = ({ stabilityDeposit, trove, lusdInStabilityPool }: LiquityStore
 
 export const ActiveDeposit: React.FC = () => {
   const { dispatchEvent } = useStabilityView();
-  const { stabilityDeposit } = useLiquitySelector(selector);
+  const { stabilityDeposit, trove, lusdInStabilityPool } = useLiquitySelector(selector);
 
   const {poolShare, bammPoolShare} = stabilityDeposit
 
@@ -33,6 +33,7 @@ export const ActiveDeposit: React.FC = () => {
 
   const hasReward = !stabilityDeposit.lqtyReward.isZero;
   const hasGain = !stabilityDeposit.collateralGain.isZero;
+  const hasTrove = !trove.isEmpty;
 
   const transactionId = "stability-deposit";
   const transactionState = useMyTransactionState(transactionId);
@@ -125,7 +126,7 @@ export const ActiveDeposit: React.FC = () => {
                 />
               }
             />
-            <Flex sx={{ justifyContent: "flex-end", flexShrink: 0 }}>
+            <Flex sx={{ justifyContent: "flex-end", flex: 1 }}>
               <Yield />
             </Flex>
           </Flex>
