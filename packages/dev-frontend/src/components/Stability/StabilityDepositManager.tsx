@@ -108,7 +108,6 @@ export const StabilityDepositManager: React.FC = () => {
     undefined,
   );
 
-  const makingNewDeposit = originalDeposit.isEmpty;
 
   const myTransactionState = useMyTransactionState(transactionId);
 
