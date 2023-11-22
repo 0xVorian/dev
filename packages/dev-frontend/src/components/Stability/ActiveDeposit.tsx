@@ -23,7 +23,7 @@ const selector = ({ stabilityDeposit, trove, lusdInStabilityPool }: LiquityStore
 
 export const ActiveDeposit: React.FC = () => {
   const { dispatchEvent } = useStabilityView();
-  const { stabilityDeposit, trove } = useLiquitySelector(selector);
+  const { stabilityDeposit } = useLiquitySelector(selector);
 
   const {poolShare, bammPoolShare} = stabilityDeposit
 
